@@ -1,5 +1,39 @@
 # Desafio Pub Future - Controle de finanças
 
+API REST para auxiliar no controle das finanças pessoais.Esse desafio foi proposto pela empresa Pública Tecnologia juntamente com a ProWay.
+
+O projeto de finanças é capaz de atender aos seguintes requisitos:
+
+## Receitas
+
+Cadastrar receitas
+- Editar receitas
+- Remover receitas
+- Listar receitas
+- Filtro por período (dataInicial – dataFinal)
+- Filtro por tipo de receita
+- Listar total de receitas
+ 
+ ## Despesas
+
+- Cadastrar despesas
+- Editar despesas
+- Remover despesas
+- Listar despesas
+- Filtro por período (dataInicial – dataFinal)
+- Filtro por tipo de despesa
+- Listar total de despesas
+
+## Contas
+
+- Cadastrar conta
+- Editar conta
+- Remover conta
+- Listar contas
+- Transferir saldo entre contas
+- Listar saldo total
+
+
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
@@ -9,14 +43,20 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 ## ☕ Usando Desafio Pub Future - Controle de finanças
 Para usar <DesafioPubFuture>, siga estas etapas:
 
-```
-<exemplo_de_uso>
-```
+Para ter acesso a aplicação de um git clone https://github.com/FelipeArruda15/DesafioPubFuture.git através do git bash em uma pasta de sua preferência ou poderá baixar o arquivo zip e extrair em sua maquina.
+Para rodar a aplicação é necessário entrar no projeto é rodar a aplicação através da classe principal PubfutureApplication.java.
+Recomendo que utilize a IDE do Eclipse.
+![fotoEclipse](https://user-images.githubusercontent.com/72116649/149638805-17beea08-ce5f-469e-84f0-7b74396863b7.jpeg)
+
+Para acessar a documentação da API REST utilize o seguinte caminho: /swagger-ui.html
+  ![Swagger](https://user-images.githubusercontent.com/72116649/149638889-0a0ea022-9b8d-4953-8778-48a3ffab7855.jpeg)
+
+Para acessar o banco de dados em memória utilize o seguinte caminho: /h2-console
+  ![H2-CONSOLE](https://user-images.githubusercontent.com/72116649/149638881-ede040db-08a4-4a97-ab91-a4e05330867a.jpeg)
+
 
 
 ## 🤝 Criador do projeto
-
-Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
 <table>
   <tr>
@@ -32,4 +72,4 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 </table>
 
 
-[⬆ Voltar ao topo](DesafioPubFuture)<br>
+[⬆ Voltar ao topo](Desafio Pub Future - Controle de finanças)<br>
