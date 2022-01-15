@@ -70,6 +70,3 @@ Para acessar o banco de dados em memória utilize o seguinte caminho: /h2-consol
     </td>
   </tr>
 </table>
-
-
-[⬆ Voltar ao topo](Desafio Pub Future - Controle de finanças)<br>
