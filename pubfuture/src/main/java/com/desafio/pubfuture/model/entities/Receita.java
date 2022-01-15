@@ -33,12 +33,20 @@ public class Receita extends EntidadeAbstrata{
 	public Receita() {
 	}
 
-	public Receita(Long id, Double valor, Date dataRecebimento, Date dataRecebimentoEsperado, String descricao,
+	public Receita( Double valor, Date dataRecebimento, Date dataRecebimentoEsperado, String descricao,
 			TipoReceita tipoReceita, Conta conta) {
-		this.id = id;
 		this.valor = valor;
 		this.dataRecebimento = dataRecebimento;
 		this.dataRecebimentoEsperado = dataRecebimentoEsperado;
+		this.descricao = descricao;
+		this.tipoReceita = tipoReceita;
+		this.conta = conta;
+	}
+	
+	public Receita(Double valor, Date dataRecebimento, String descricao,
+			TipoReceita tipoReceita, Conta conta) {
+		this.valor = valor;
+		this.dataRecebimento = dataRecebimento;
 		this.descricao = descricao;
 		this.tipoReceita = tipoReceita;
 		this.conta = conta;

@@ -37,6 +37,13 @@ public class Despesa extends EntidadeAbstrata{
 		this.tipoDespesa = tipoDespesa;
 		this.conta = conta;
 	}
+	
+	public Despesa(Double valor, Date dataPagamento, TipoDespesa tipoDespesa, Conta conta) {
+		this.valor = valor;
+		this.dataPagamento = dataPagamento;
+		this.tipoDespesa = tipoDespesa;
+		this.conta = conta;
+	}
 
 	public Double getValor() {
 		return valor;
