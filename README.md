@@ -22,7 +22,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
   <tr>
     <td align="center">
       <a href="#">
-        <img src="https://www.linkedin.com/in/felipe-arruda-souza-4452611a2/" width="100px;" alt="Foto do Felipe Arruda LinkedIn"/><br>
+        <img src="https://media-exp1.licdn.com/dms/image/C5603AQGi1cOrmQ1Qsw/profile-displayphoto-shrink_800_800/0/1593656915242?e=1647475200&v=beta&t=MNAaxsq6BW1QmOoD03M0Uk2NQ_N1PRQtBRb8Me-BgqM" width="100px;" alt="Foto do Felipe Arruda LinkedIn"/><br>
         <sub>
           <b>Felipe Arruda Souza</b>
         </sub>
