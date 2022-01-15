@@ -23,6 +23,7 @@ public class Despesa extends EntidadeAbstrata{
 	
 	
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "conta_id")
 	private Conta conta;
 
