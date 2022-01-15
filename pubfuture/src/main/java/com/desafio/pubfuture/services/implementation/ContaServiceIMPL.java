@@ -2,13 +2,13 @@ package com.desafio.pubfuture.services.implementation;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.desafio.pubfuture.dto.ContaDTO;
+import com.desafio.pubfuture.exceptions.EntityNotFoundException;
 import com.desafio.pubfuture.model.entities.Conta;
 import com.desafio.pubfuture.model.entities.Despesa;
 import com.desafio.pubfuture.model.entities.Receita;
@@ -85,18 +85,19 @@ public class ContaServiceIMPL implements ContaService {
 	}
 
 	private boolean saldoSuficiente(Conta conta, Double valor) {
-		if(conta.getSaldo() > valor)
+		if (conta.getSaldo() > valor)
 			return true;
 		return false;
 	}
-	
+
 	public List<ContaDTO> findByInstituicaoFinanceira(String instituicao) {
 		List<Conta> contas = repository.findByInstituicaoFinanceiraIgnoreCase(instituicao);
 		return contas.stream().map(conta -> new ContaDTO(conta)).collect(Collectors.toList());
 	}
 
 	private void criarReceita(Conta conta, double valor) {
-		Receita receita = new Receita(valor, new Date(), "Dinheiro recebido por outra conta", TipoReceita.OUTROS, conta);
+		Receita receita = new Receita(valor, new Date(), "Dinheiro recebido por outra conta", TipoReceita.OUTROS,
+				conta);
 		receitaRepository.save(receita);
 		conta.addReceita(receita);
 		repository.save(conta);
@@ -110,10 +111,7 @@ public class ContaServiceIMPL implements ContaService {
 	}
 
 	private void verificarContaExistente(Long id) {
-		Optional<Conta> conta = repository.findById(id);
-		if (!conta.isPresent()) {
-			throw new NullPointerException("Conta não encontrada com ID:" + id);
-		}
+		repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Conta não encontrada " + id));
 	}
 
 }

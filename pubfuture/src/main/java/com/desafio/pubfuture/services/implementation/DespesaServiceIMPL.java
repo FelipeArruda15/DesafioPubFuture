@@ -1,7 +1,6 @@
 package com.desafio.pubfuture.services.implementation;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;

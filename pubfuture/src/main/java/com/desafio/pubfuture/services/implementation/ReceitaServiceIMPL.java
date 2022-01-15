@@ -6,11 +6,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.desafio.pubfuture.dto.DespesaDTO;
 import com.desafio.pubfuture.dto.ReceitaDTO;
 import com.desafio.pubfuture.exceptions.EntityNotFoundException;
 import com.desafio.pubfuture.model.entities.Conta;
-import com.desafio.pubfuture.model.entities.Despesa;
 import com.desafio.pubfuture.model.entities.Receita;
 import com.desafio.pubfuture.repositories.ContaRepository;
 import com.desafio.pubfuture.repositories.ReceitaRepository;
