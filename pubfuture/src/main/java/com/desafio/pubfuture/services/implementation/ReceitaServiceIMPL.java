@@ -6,9 +6,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.desafio.pubfuture.dto.DespesaDTO;
 import com.desafio.pubfuture.dto.ReceitaDTO;
 import com.desafio.pubfuture.exceptions.EntityNotFoundException;
 import com.desafio.pubfuture.model.entities.Conta;
+import com.desafio.pubfuture.model.entities.Despesa;
 import com.desafio.pubfuture.model.entities.Receita;
 import com.desafio.pubfuture.repositories.ContaRepository;
 import com.desafio.pubfuture.repositories.ReceitaRepository;
@@ -52,16 +54,14 @@ public class ReceitaServiceIMPL implements ReceitaService {
 	public void delete(Long id) {
 		verificarReceitaExistente(id);
 		Receita receitaExcluida = repository.findById(id).get();
+		removerReceitaDaContaVinculada(receitaExcluida);
 		repository.deleteById(id);
-		Conta conta = contaVinculada(receitaExcluida.getId());
-		conta.removeReceita(receitaExcluida);
 	}
 
 	@Override
 	public ReceitaDTO update(Receita receita) {
 		verificarReceitaExistente(receita.getId());
 		Receita receitaAtualizada = repository.save(receita);
-		repositoryConta.save(receitaAtualizada.getConta());
 		return new ReceitaDTO(receitaAtualizada);
 	}
 
@@ -87,6 +87,12 @@ public class ReceitaServiceIMPL implements ReceitaService {
 			String dtFinal = ConverterData.ConverterParaSQL(dataFinal);
 			List<Receita> receitas = repository.findByDataRecebimento(dtInicio, dtFinal);
 			return receitas.stream().map(receita -> new ReceitaDTO(receita)).collect(Collectors.toList());	
+	}
+	
+	private void removerReceitaDaContaVinculada(Receita receita) {
+		Conta conta = contaVinculada(receita.getConta().getId());
+		conta.removeReceita(receita);
+		repositoryConta.save(conta);
 	}
 
 	public Conta contaVinculada(Long id) {

@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.desafio.pubfuture.dto.DespesaDTO;
+import com.desafio.pubfuture.exceptions.EntityNotFoundException;
 import com.desafio.pubfuture.model.entities.Conta;
 import com.desafio.pubfuture.model.entities.Despesa;
-import com.desafio.pubfuture.model.entities.Receita;
 import com.desafio.pubfuture.repositories.ContaRepository;
 import com.desafio.pubfuture.repositories.DespesaRepository;
 import com.desafio.pubfuture.services.interfaces.DespesaService;
@@ -52,17 +52,14 @@ public class DespesaServiceIMPL implements DespesaService {
 	public void delete(Long id) {
 		verificarDespesaExistente(id);
 		Despesa despesaExcluida = repository.findById(id).get();
+		removerDespesaDaContaVinculada(despesaExcluida);
 		repository.deleteById(id);
-		Conta conta = contaVinculada(despesaExcluida.getId());
-		conta.removeDespesa(despesaExcluida);
 	}
 
 	@Override
 	public DespesaDTO update(Despesa despesa) {
 		verificarDespesaExistente(despesa.getId());
 		Despesa despesaAtualizada = repository.save(despesa);
-		despesaAtualizada.getConta().setSaldo(null);
-		repositoryConta.save(despesaAtualizada.getConta());
 		return new DespesaDTO(despesaAtualizada);
 	}
 
@@ -91,17 +88,22 @@ public class DespesaServiceIMPL implements DespesaService {
 		return despesas.stream().map(despesa -> new DespesaDTO(despesa)).collect(Collectors.toList());
 
 	}
-
+	
+	private void removerDespesaDaContaVinculada(Despesa despesa) {
+		Conta conta = contaVinculada(despesa.getConta().getId());
+		conta.removeDespesa(despesa);
+		repositoryConta.save(conta);
+	}
+	
 	private Conta contaVinculada(Long id) {
-		Conta conta = repositoryConta.getById(id);
+		Conta conta = repositoryConta.findById(id).orElseThrow(
+				() -> new EntityNotFoundException("Conta não encontrada " + id));
 		return conta;
 	}
 
-	private void verificarDespesaExistente(Long id) {
-		Optional<Despesa> despesa = repository.findById(id);
-		if (!despesa.isPresent()) {
-			throw new NullPointerException("Despesa não encontrada com o ID: " + id);
-		}
+	private void verificarDespesaExistente(Long id) {	
+		repository.findById(id).orElseThrow(
+				() -> new EntityNotFoundException("Despesa não encontrada com o ID: " + id));
 	}
 
 }
