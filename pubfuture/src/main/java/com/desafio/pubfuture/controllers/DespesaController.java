@@ -38,7 +38,7 @@ public class DespesaController {
 		return new ResponseEntity<>(despesas, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/saldoDespesa")
+	@GetMapping(value = "/saldoDespesas")
 	public ResponseEntity<?> saldoTotal() {
 		Double saldoTotal = service.mostrarSaldoTotal();
 		return new ResponseEntity<>(saldoTotal, HttpStatus.OK);
