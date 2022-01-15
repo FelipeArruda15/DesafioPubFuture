@@ -39,16 +39,16 @@ public class Conta extends EntidadeAbstrata {
 		this.tipoConta = tipoConta;
 		this.instituicaoFinanceira = instituicaoFinanceira;
 	}
-	
+
 	public Conta(TipoConta tipoConta, String instituicaoFinanceira) {
 		this.tipoConta = tipoConta;
 		this.instituicaoFinanceira = instituicaoFinanceira;
 	}
-	
-	public Double getSaldo(){
+
+	public Double getSaldo() {
 		return saldo;
 	}
-	
+
 	public void setSaldo(Double saldo) {
 		this.saldo = saldo;
 	}
@@ -81,12 +81,24 @@ public class Conta extends EntidadeAbstrata {
 		receitas.add(receita);
 		setSaldo(saldo + receita.getValor());
 	}
-	
+
 	public void addDespesa(Despesa despesa) {
 		despesas.add(despesa);
 		setSaldo(saldo - despesa.getValor());
 	}
-	
+
+	public void removeReceita(Receita receita) {
+		setSaldo(saldo - receita.getValor());
+		receitas.remove(receita);
+
+	}
+
+	public void removeDespesa(Despesa despesa) {
+		setSaldo(saldo + despesa.getValor());
+		despesas.remove(despesa);
+
+	}
+
 	@Override
 	public String toString() {
 		return "Conta [id=" + id + ", saldo=" + saldo + ", tipoConta=" + tipoConta + ", instituicaoFinanceira="

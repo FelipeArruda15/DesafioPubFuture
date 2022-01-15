@@ -51,13 +51,17 @@ public class ReceitaServiceIMPL implements ReceitaService {
 	@Override
 	public void delete(Long id) {
 		verificarReceitaExistente(id);
+		Receita receitaExcluida = repository.findById(id).get();
 		repository.deleteById(id);
+		Conta conta = contaVinculada(receitaExcluida.getId());
+		conta.removeReceita(receitaExcluida);
 	}
 
 	@Override
 	public ReceitaDTO update(Receita receita) {
 		verificarReceitaExistente(receita.getId());
 		Receita receitaAtualizada = repository.save(receita);
+		repositoryConta.save(receitaAtualizada.getConta());
 		return new ReceitaDTO(receitaAtualizada);
 	}
 
@@ -93,7 +97,7 @@ public class ReceitaServiceIMPL implements ReceitaService {
 
 	public void verificarReceitaExistente(Long id) {
 		 	repository.findById(id).orElseThrow(
-				() -> new EntityNotFoundException("Id não encontrado " + id));
+				() -> new EntityNotFoundException("Id não encontrado: " + id));
 	}
 
 }

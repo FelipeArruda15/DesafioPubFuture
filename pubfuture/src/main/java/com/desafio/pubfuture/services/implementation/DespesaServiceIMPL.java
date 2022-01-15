@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.desafio.pubfuture.dto.DespesaDTO;
 import com.desafio.pubfuture.model.entities.Conta;
 import com.desafio.pubfuture.model.entities.Despesa;
+import com.desafio.pubfuture.model.entities.Receita;
 import com.desafio.pubfuture.repositories.ContaRepository;
 import com.desafio.pubfuture.repositories.DespesaRepository;
 import com.desafio.pubfuture.services.interfaces.DespesaService;
@@ -50,13 +51,18 @@ public class DespesaServiceIMPL implements DespesaService {
 	@Override
 	public void delete(Long id) {
 		verificarDespesaExistente(id);
+		Despesa despesaExcluida = repository.findById(id).get();
 		repository.deleteById(id);
+		Conta conta = contaVinculada(despesaExcluida.getId());
+		conta.removeDespesa(despesaExcluida);
 	}
 
 	@Override
 	public DespesaDTO update(Despesa despesa) {
 		verificarDespesaExistente(despesa.getId());
 		Despesa despesaAtualizada = repository.save(despesa);
+		despesaAtualizada.getConta().setSaldo(null);
+		repositoryConta.save(despesaAtualizada.getConta());
 		return new DespesaDTO(despesaAtualizada);
 	}
 
