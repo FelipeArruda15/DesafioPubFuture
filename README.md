@@ -48,7 +48,7 @@ Para rodar a aplicação é necessário entrar no projeto é rodar a aplicação
 Recomendo que utilize a IDE do Eclipse.
 ![fotoEclipse](https://user-images.githubusercontent.com/72116649/149638805-17beea08-ce5f-469e-84f0-7b74396863b7.jpeg)
 
-Para acessar a documentação da API REST utilize o seguinte caminho: /swagger-ui.html
+Para acessar a documentação da API REST e testar os endpoints utilize o seguinte caminho: /swagger-ui.html
   ![Swagger](https://user-images.githubusercontent.com/72116649/149638889-0a0ea022-9b8d-4953-8778-48a3ffab7855.jpeg)
 
 Para acessar o banco de dados em memória utilize o seguinte caminho: /h2-console
